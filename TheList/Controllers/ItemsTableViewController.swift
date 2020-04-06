@@ -180,7 +180,7 @@ class ItemsTableViewController: UITableViewController {
         let sectionLabel = UILabel(frame: CGRect(x: 8, y: 26, width:
             tableView.bounds.size.width, height: tableView.bounds.size.height))
         sectionLabel.font = UIFont(name: "Helvetica", size: 17)
-        sectionLabel.textColor = UIColor.black
+        sectionLabel.textColor = .label
         if section == 0 {
              sectionLabel.text = "To Do"
         } else {
