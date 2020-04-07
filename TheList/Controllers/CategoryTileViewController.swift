@@ -46,10 +46,12 @@ class CategoryTileViewController: UIViewController, UITextFieldDelegate {
     
     var navColor: UIColor?
     
+    //SET NAV BAR COLOR BACK TO DEFAULT AFTER RETURNING FROM ITEMS
     override func viewWillAppear(_ animated: Bool) {
         navigationController?.navigationBar.barTintColor = navColor
     }
     
+    //GESTURE RECOGNIZERS - PRESS TO NAVIGATE TO ITEMS, LONG PRESS TO DELETE CATEGORY
     func onePress () -> UITapGestureRecognizer {
         let onePress = UITapGestureRecognizer(target: self, action: #selector(press(sender:)))
         
@@ -64,6 +66,7 @@ class CategoryTileViewController: UIViewController, UITextFieldDelegate {
     
     var categorySelected: Category?
     var viewSelected: UITextField?
+    
     
     @objc func press (sender : UITapGestureRecognizer) {
         
@@ -122,7 +125,7 @@ class CategoryTileViewController: UIViewController, UITextFieldDelegate {
     }
     
     
-    
+    // ADD CATEGORY. IMPLEMENTED CHECK IF SAME ALREADY EXISTS, IF IT DOES, INFO MESSAGE WILL POP UP AND PREVENT DUPLICATION
     @IBAction func addCategory(_ sender: UIBarButtonItem) {
         var tileIndex = 0
         var userInput = UITextField()
@@ -195,6 +198,7 @@ class CategoryTileViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var initialLabel: UILabel!
     
+    //CLEAR ALL CATEGORIES. IMPLEMENTED CONFIRMATION WINDOW
     @IBAction func clearAll(_ sender: UIBarButtonItem) {
         let alert = UIAlertController(title: "Clear All", message: "Are you sure you want to clear all categories?", preferredStyle: .alert)
         let delete = UIAlertAction(title: "Delete All", style: .destructive) { (delete) in

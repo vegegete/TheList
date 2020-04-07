@@ -23,6 +23,7 @@ class ItemsTableViewController: UITableViewController {
     
     var itemArray = [Item]()
     
+    //SET NAV BAR TITLE AS CATEGORY NAME
     var categorySelected : Category? {
         
         willSet{
@@ -33,6 +34,8 @@ class ItemsTableViewController: UITableViewController {
           
         }
     }
+    
+    //SET NAV BAR COLOR BASED ON CATEGORY COLOR
 
     override func viewWillAppear(_ animated: Bool) {
         guard let navBar = navigationController?.navigationBar else {fatalError("Navigation Controller not loaded yet.")}
@@ -48,6 +51,8 @@ class ItemsTableViewController: UITableViewController {
     }
     
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    
+    //ADD NEW ITEM. IMPLEMENTED CHECK IF SAME ITEM ALREADY EXISTS
     
     @IBAction func addItem(_ sender: UIBarButtonItem) {
         
@@ -232,6 +237,7 @@ class ItemsTableViewController: UITableViewController {
        
     }
     
+    //DELETE ITEM
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return true
     }
