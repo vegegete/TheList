@@ -13,6 +13,7 @@ class CategoryTileViewController: UIViewController, UITextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         loadCategory()
         navColor = navigationController?.navigationBar.barTintColor
         print(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask))
@@ -26,6 +27,7 @@ class CategoryTileViewController: UIViewController, UITextFieldDelegate {
         var num = 0
         
         for i in categoryTiles {
+            
             i.textAlignment = .center
             i.font = .boldSystemFont(ofSize: 35)
             categoryTiles[num].delegate = self
@@ -71,12 +73,17 @@ class CategoryTileViewController: UIViewController, UITextFieldDelegate {
     @objc func press (sender : UITapGestureRecognizer) {
         
         let sourceView = sender.view as? UITextField
-        let viewTag = sourceView?.tag
+        let nameView = sourceView?.text
+        //let viewTag = sourceView?.tag
         for i in categoryTiles {
-            if i.tag == viewTag {
-                categorySelected = categories.first(where: {$0.name == i.text!})!
-                viewSelected = i
+             if i.text == nameView {
+            //if i.tag == viewTag {
+                //categorySelected = categories.first(where: {$0.name == i.text!})!
+                categorySelected = categories.first(where: {$0.name == nameView!})!
+           
+            viewSelected = i
             }
+           // }
         }
         performSegue(withIdentifier: "GoToItems", sender: self)
     }
@@ -92,18 +99,25 @@ class CategoryTileViewController: UIViewController, UITextFieldDelegate {
     @objc func long (sender: UILongPressGestureRecognizer) {
         let alert = UIAlertController(title: "Delete Category", message: nil, preferredStyle: .alert)
         let sourceView = sender.view as? UITextField
-        let viewTag = sourceView?.tag
+        let nameView = sourceView?.text
+        //let viewTag = sourceView?.tag
         
         let action = UIAlertAction(title: "Delete", style: .destructive) { (action) in
             
             for i in self.categoryTiles {
-                if i.tag == viewTag {
+                //if i.tag == viewTag {
                     
-                    self.context.delete(self.categories.first(where: {$0.name == i.text!})!)
-                    self.categories.removeAll(where: {$0.name == i.text!})
+                   // self.context.delete(self.categories.first(where: {$0.name == i.text!})!)
+                   // self.categories.removeAll(where: {$0.name == i.text!})
+                 if i.text == nameView {
+                self.context.delete(self.categories.first(where: {$0.name == nameView!})!)
+                self.categories.removeAll(where: {$0.name == nameView!})
+                
+                //}
+               
+               
                 }
-          
-                i.text = ""
+                 i.text = ""
             }
             self.saveCategory()
             self.viewDidLoad()
